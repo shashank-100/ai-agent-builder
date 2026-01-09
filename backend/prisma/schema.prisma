@@ -1,0 +1,93 @@
+// This is your Prisma schema file
+// Learn more: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id         String      @id @default(uuid())
+  email      String      @unique
+  name       String?
+  createdAt  DateTime    @default(now()) @map("created_at")
+  updatedAt  DateTime    @updatedAt @map("updated_at")
+
+  workspaces Workspace[]
+
+  @@map("users")
+}
+
+model Workspace {
+  id        String   @id @default(uuid())
+  name      String
+  ownerId   String   @map("owner_id")
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  owner  User    @relation(fields: [ownerId], references: [id])
+  agents Agent[]
+
+  @@map("workspaces")
+}
+
+model AgentTemplate {
+  id          String   @id @default(uuid())
+  name        String
+  description String?
+  icon        String?
+  category    String?
+  config      Json
+  isPublic    Boolean  @default(true) @map("is_public")
+  createdAt   DateTime @default(now()) @map("created_at")
+
+  agents Agent[]
+
+  @@map("agent_templates")
+}
+
+model Agent {
+  id                   String   @id @default(uuid())
+  workspaceId          String   @map("workspace_id")
+  name                 String
+  description          String?
+  model                String
+  systemPrompt         String?  @map("system_prompt") @db.Text
+  tools                Json?
+  configuration        Json?
+  workflowDefinition   Json?    @map("workflow_definition")
+  workflowType         String   @default("visual") @map("workflow_type")
+  qualityScore         Int?     @map("quality_score")
+  performanceMetrics   Json?    @map("performance_metrics")
+  templateId           String?  @map("template_id")
+  status               String   @default("draft")
+  version              Int      @default(1)
+  createdAt            DateTime @default(now()) @map("created_at")
+  updatedAt            DateTime @updatedAt @map("updated_at")
+
+  workspace  Workspace       @relation(fields: [workspaceId], references: [id])
+  template   AgentTemplate?  @relation(fields: [templateId], references: [id])
+  executions AgentExecution[]
+
+  @@map("agents")
+}
+
+model AgentExecution {
+  id          String    @id @default(uuid())
+  agentId     String    @map("agent_id")
+  input       Json
+  output      Json?
+  status      String    @default("running")
+  error       String?   @db.Text
+  durationMs  Int?      @map("duration_ms")
+  startedAt   DateTime  @default(now()) @map("started_at")
+  completedAt DateTime? @map("completed_at")
+
+  agent Agent @relation(fields: [agentId], references: [id])
+
+  @@map("agent_executions")
+}

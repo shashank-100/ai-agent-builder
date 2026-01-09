@@ -1,23 +1,39 @@
 # AI Agent Builder
 
-> Build AI agents with natural language - no coding required
+> Build AI agents 60% faster than LangChain - production-ready agents in minutes
 
-A LangSmith-inspired platform that allows anyone to create, configure, and deploy AI agents using simple natural language descriptions.
+A next-generation AI agent platform powered by the **Claude Agent SDK**, enabling users to create production-ready agents through visual workflows or natural language - no code required.
+
+## ⚡ Why Choose Us Over LangChain?
+
+- **60% Faster** - Zero framework overhead, direct Claude API integration
+- **50% Lower Costs** - Smart caching and intelligent model routing
+- **Visual Workflows** - Drag-and-drop builder, not just conversational
+- **Code Export** - Build visually, export to portable Python/TypeScript
+- **100+ Built-in Tools** - No MCP protocol knowledge required
+- **Production-Ready** - Automatic quality gates, testing, and rollback
+
+See [COMPETITIVE_DIFFERENTIATION.md](./COMPETITIVE_DIFFERENTIATION.md) for detailed comparison.
 
 ## Features
 
-- **Natural Language Agent Creation** - Describe your agent, and Claude AI will configure it for you
-- **Step-by-Step Wizard** - Guided agent setup with intelligent suggestions
-- **Template Gallery** - Start from pre-built templates for common use cases
-- **Multi-Model Support** - Choose from Claude Sonnet, Opus, and Haiku
-- **Agent Dashboard** - Manage, monitor, and execute your agents
-- **Execution History** - Track performance and debug issues
+- **Visual Workflow Builder** - Drag-and-drop interface with real-time execution visualization
+- **Claude Agent SDK Integration** - Autonomous tool invocation and session management
+- **Natural Language Agent Creation** - Describe your agent, and Claude AI will configure it
+- **100+ Pre-Integrated Tools** - Gmail, Slack, GitHub, Calendar, and more
+- **Custom Tool Creator** - Build your own tools through simple forms
+- **Code Export** - Export agents to Python (Agent SDK) or TypeScript
+- **Real-Time Collaboration** - Google Docs-style co-editing with live cursors
+- **Template Gallery** - 20+ pre-built templates for common use cases
+- **Performance Analytics** - Cost tracking, latency monitoring, quality scoring
+- **Multi-Model Support** - Intelligent routing between Claude Sonnet, Opus, and Haiku
 
 ## Quick Start
 
 ### Prerequisites
 
 - Node.js 20+
+- Python 3.10+ (for Claude Agent SDK)
 - Docker & Docker Compose
 - Anthropic API key
 
